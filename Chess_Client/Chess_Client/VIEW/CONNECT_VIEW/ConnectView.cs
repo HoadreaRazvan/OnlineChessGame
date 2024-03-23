@@ -30,7 +30,7 @@ namespace Chess_Client.VIEW.CONNECT_VIEW
         public void InitializeComponent()
         {
             this.Width = 570;
-            this.Height = 530;
+            this.Height = 480;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.WindowStyle = WindowStyle.None;
             this.Background = Brushes.Transparent;

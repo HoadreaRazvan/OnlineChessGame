@@ -29,7 +29,7 @@ namespace Chess_Client.VIEW.LOGIN_VIEW
         public void InitializeComponent()
         {
             this.Width = 350;
-            this.Height = 405;
+            this.Height = 425;
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             this.WindowStyle = WindowStyle.None;
             this.Background = Brushes.Transparent;

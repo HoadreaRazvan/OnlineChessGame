@@ -47,18 +47,18 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             this.pathBorderMove = Directory.GetCurrentDirectory() + @"\Images\BorderMove.png";
             this.pathAttention = Directory.GetCurrentDirectory() + @"\Images\Attention.png";
 
-            this.lastMoveDark1 = new MyImage(pathLastMoveDark, pathTransparent);
-            this.lastMoveDark2 = new MyImage(pathLastMoveDark, pathTransparent);
-            this.lastMoveDark3 = new MyImage(pathLastMoveDark, pathTransparent);
-            this.lastMoveDark4 = new MyImage(pathLastMoveDark, pathTransparent);
+            this.lastMoveDark1 = new MyImage(pathLastMoveDark, pathTransparent,this.MyColor);
+            this.lastMoveDark2 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
+            this.lastMoveDark3 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
+            this.lastMoveDark4 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
 
-            this.lastMoveLight1 = new MyImage(pathLastMoveLight, pathTransparent);
-            this.lastMoveLight2 = new MyImage(pathLastMoveLight, pathTransparent);
-            this.lastMoveLight3 = new MyImage(pathLastMoveLight, pathTransparent);
-            this.lastMoveLight4 = new MyImage(pathLastMoveLight, pathTransparent);
+            this.lastMoveLight1 = new MyImage(pathLastMoveLight, pathTransparent, this.MyColor);
+            this.lastMoveLight2 = new MyImage(pathLastMoveLight, pathTransparent, this.MyColor);
+            this.lastMoveLight3 = new MyImage(pathLastMoveLight, pathTransparent, this.MyColor);
+            this.lastMoveLight4 = new MyImage(pathLastMoveLight, pathTransparent, this.MyColor);
 
-            this.lastBorderedPiece = new MyImage(pathBorderMove, pathTransparent);
-            this.attentionMyImage = new MyImage(pathAttention, pathTransparent);
+            this.lastBorderedPiece = new MyImage(pathBorderMove, pathTransparent, this.MyColor);
+            this.attentionMyImage = new MyImage(pathAttention, pathTransparent, this.MyColor);
 
             Panel.SetZIndex(this.attentionMyImage, 1);
             Panel.SetZIndex(this.lastMoveDark1, 0);
@@ -131,6 +131,8 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             {
                 if ((piece as Piece).PieceColor == this.MyColor)
                 {
+                    this.GameController.GameView.Cursor = Cursors.Hand;
+
                     this.isDragging = true;
                     (piece as Piece).MyImage.CaptureMouse();
                     this.movePiece(piece, e);
@@ -233,6 +235,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
         {
             if (this.isDragging == true)
             {
+                this.GameController.GameView.Cursor = Cursors.Arrow;
                 Point currentPos = e.GetPosition(this.gameController.GameView.MainGameView.BoardMainGameView.CanvasBoard);
                 int dY = (int)currentPos.X / 85;
                 int dX = (int)currentPos.Y / 85;

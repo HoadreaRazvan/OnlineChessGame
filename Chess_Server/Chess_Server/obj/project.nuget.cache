@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bDVi+eY5goeP3kj8+vAMFOldeVlvvgaSiSCVYMpFyyTMga6/hxoj6dJvPQBt4P5/RVkHA3ohRlmM7tsbk8dHOw==",
+  "dgSpecHash": "q+Tmvu6IOMa3wVOXcHUHE2r1ZSWVxDQx7+uUoOUwROEOLpDBIZkNjJ/khiZ0my1oEwE3xSZ/ZnCw56sW3eToYA==",
   "success": true,
-  "projectFilePath": "D:\\1_PROGRAMMING\\C#\\2_PROJECTS\\Proiect_OOP\\Hoadrea_Razvan\\Chess_Server\\Chess_Server\\Chess_Server.csproj",
+  "projectFilePath": "D:\\1_PROGRAMMING\\C#\\2_PROJECTS\\Proiect_OOP\\OnlineChessGame\\Chess_Server\\Chess_Server\\Chess_Server.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

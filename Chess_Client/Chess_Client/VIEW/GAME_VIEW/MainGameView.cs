@@ -28,6 +28,7 @@ namespace Chess_Client.VIEW.GAME_VIEW
         private ObservableCollection<string> imagesCollection;
         private bool changePawn;
         private bool rematchInvitation;
+        private bool invitationAlreadySent;
 
         private GameView gameView;
         private ChatHistoryMainGameView chatHistoryMainGameView;
@@ -57,6 +58,7 @@ namespace Chess_Client.VIEW.GAME_VIEW
             this.gameView = gameView;
             this.changePawn = false;
             this.rematchInvitation = false;
+            this.invitationAlreadySent = false;
             InitializeComponent();
             this.chatHistoryMainGameView = new ChatHistoryMainGameView(gameView);
             this.boardMainGameView = new BoardMainGameView(gameView);
@@ -242,6 +244,7 @@ namespace Chess_Client.VIEW.GAME_VIEW
             {
                 Name = "BtnResign",
                 Content = "Resign",
+                Cursor = Cursors.Hand,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Width = 140,
@@ -259,6 +262,7 @@ namespace Chess_Client.VIEW.GAME_VIEW
             {
                 Name = "BtnRematch",
                 Content = "Rematch",
+                Cursor = Cursors.Hand,
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Width = 140,
@@ -319,10 +323,10 @@ namespace Chess_Client.VIEW.GAME_VIEW
         public void addCapture(StackPanel stackPanelImage, StackPanel stackPanelNumber, string pathImage)
         {
             imagesCollection.Add(pathImage);
-
             Image captureImage = new Image()
             {
                 Source = new BitmapImage(new Uri(pathImage)),
+                Cursor = stackPanelImage == this.stPOpponentPiece ? Cursors.Hand : Cursors.Arrow,
                 Width = 60,
                 Height = 60,
                 Margin = new Thickness(5),
@@ -560,17 +564,34 @@ namespace Chess_Client.VIEW.GAME_VIEW
         {
             if (this.rematchInvitation == false)
             {
-                this.gameView.GameController.Network.SendMessage(this.gameView.GameController.Network.You.IP + "|" + this.gameView.GameController.Network.Opponent.IP + "|gameController|rematchRequest");
-                foreach (object window in Application.Current.Windows)
-                    if (window is MyMessageBox)
-                        (window as MyMessageBox).Close();
+                if (this.invitationAlreadySent == false)
+                {
+                    this.gameView.GameController.Network.SendMessage(this.gameView.GameController.Network.You.IP + "|" + this.gameView.GameController.Network.Opponent.IP + "|gameController|rematchRequest");
+                    this.invitationAlreadySent = true;
+                    foreach (object window in Application.Current.Windows)
+                        if (window is MyMessageBox)
+                            (window as MyMessageBox).Close();
 
-                this.gameView.IsEnabled = false;
-                MyMessageBox myMessageBox = new MyMessageBox("You have successfully submitted a rematch request!");
-                myMessageBox.Left = this.gameView.Left + (this.gameView.Width - myMessageBox.Width) / 2;
-                myMessageBox.Top = this.gameView.Top + (this.gameView.Height - myMessageBox.Height) / 2;
-                myMessageBox.Closed += (sender, e) => { this.gameView.IsEnabled = true; };
-                myMessageBox.Show();
+                    this.gameView.IsEnabled = false;
+                    MyMessageBox myMessageBox = new MyMessageBox("You have successfully submitted a rematch request!");
+                    myMessageBox.Left = this.gameView.Left + (this.gameView.Width - myMessageBox.Width) / 2;
+                    myMessageBox.Top = this.gameView.Top + (this.gameView.Height - myMessageBox.Height) / 2;
+                    myMessageBox.Closed += (sender, e) => { this.gameView.IsEnabled = true; };
+                    myMessageBox.Show();
+                }
+                else
+                {
+                    foreach (object window in Application.Current.Windows)
+                        if (window is MyMessageBox)
+                            (window as MyMessageBox).Close();
+
+                    this.gameView.IsEnabled = false;
+                    MyMessageBox myMessageBox = new MyMessageBox("You have already sent an invitation!");
+                    myMessageBox.Left = this.gameView.Left + (this.gameView.Width - myMessageBox.Width) / 2;
+                    myMessageBox.Top = this.gameView.Top + (this.gameView.Height - myMessageBox.Height) / 2;
+                    myMessageBox.Closed += (sender, e) => { this.gameView.IsEnabled = true; };
+                    myMessageBox.Show();
+                }
             }
             else
             if(this.rematchInvitation==true) 
@@ -599,6 +620,11 @@ namespace Chess_Client.VIEW.GAME_VIEW
             }
         }
 
+        
+        public bool InvitationAlreadySent
+        {
+            get => this.invitationAlreadySent; set => this.invitationAlreadySent = value;
+        }
         public bool RematchInvitation
         {
             get => this.rematchInvitation; set => this.rematchInvitation = value;

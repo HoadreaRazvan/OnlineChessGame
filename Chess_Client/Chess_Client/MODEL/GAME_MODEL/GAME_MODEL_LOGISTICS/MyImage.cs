@@ -9,6 +9,8 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using System.Windows;
 using System.IO;
+using System.Windows.Input;
+using System.Diagnostics;
 
 namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 {
@@ -16,12 +18,14 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
     {
         private Image image;
         private string backgroundPath, imagePath;
+        private PieceColor myColor;
 
 
-        public MyImage(string backgroundPath, string imagePath)
+        public MyImage(string backgroundPath, string imagePath, PieceColor myColor)
         {
             this.backgroundPath = backgroundPath;
             this.imagePath = imagePath;
+            this.myColor = myColor;
             base.Width = 85;
             base.Height = 85;
             this.setBackgroundPath(backgroundPath);
@@ -31,18 +35,23 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
                 Margin = new Thickness(3),
                 Stretch = Stretch.Fill
             };
-            this.setImagePath(imagePath);
+            this.setImagePath(imagePath, myColor);
             base.Children.Add(this.image);
         }
 
 
-        public void setImagePath(string imagePath)
+        public void setImagePath(string imagePath, PieceColor myColor)
         {
             this.imagePath = imagePath;
+            this.myColor = myColor;
+            if ((this.imagePath.Split(".")[this.imagePath.Split(".").Length - 2][this.imagePath.Split(".")[this.imagePath.Split(".").Length - 2].Length - 1]+"").Equals(((this.myColor == PieceColor.White) ? "W" : "B")) == true) 
+                this.Cursor = Cursors.Hand;
+            else
+                this.Cursor = Cursors.Arrow;
             try
             {
                 this.image.Source = new BitmapImage(new Uri(imagePath));
-            }catch (Exception ex) { }
+            }catch (Exception ex) { } //din functia de matt
         }
 
         public void setBackgroundPath(string backgroundPath)

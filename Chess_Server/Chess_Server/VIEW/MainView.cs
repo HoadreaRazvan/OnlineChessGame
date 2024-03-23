@@ -153,7 +153,7 @@ namespace Chess_Server.VIEW
             Label lblSignature = new Label
             {
                 Name = "LblSignature",
-                Content = "Hoadrea Razvan S&E",
+                Content = "Created and Developed by Hoadrea Razvan S&E",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top,
                 Height = 35,
@@ -161,6 +161,7 @@ namespace Chess_Server.VIEW
                 VerticalContentAlignment = VerticalAlignment.Center,
                 FontFamily = new FontFamily("Arial"),
                 FontWeight = FontWeights.SemiBold,
+                FontStyle = FontStyles.Italic,
                 FontSize = 14
             };
 

@@ -23,7 +23,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_PIECES
             this.chessGame = chessGame;
             this.CollisionMoves = new ObservableCollection<string>();
             string path = Directory.GetCurrentDirectory() + @"\Images\Transparent.png";
-            MyImage myImage = new MyImage(path, path);
+            MyImage myImage = new MyImage(path, path, this.chessGame.MyColor);
 
             base.MyImage = myImage;
             base.MyImage.MouseDown += MyImage_MouseDown;

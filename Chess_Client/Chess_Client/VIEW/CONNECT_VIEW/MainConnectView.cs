@@ -43,7 +43,7 @@ namespace Chess_Client.VIEW.CONNECT_VIEW
             HorizontalAlignment = HorizontalAlignment.Left;
             VerticalAlignment = VerticalAlignment.Top;
             Width = 570;
-            Height = 485;
+            Height = 435;
             Margin = new Thickness(0, 45, 0, 0);
             CornerRadius = new CornerRadius(0, 0, 30, 30);
             Background = Brushes.White;
@@ -186,19 +186,6 @@ namespace Chess_Client.VIEW.CONNECT_VIEW
                 FontSize = 14
             };
 
-            Label lblSignature = new Label
-            {
-                Content = "Hoadrea Razvan S&E",
-                HorizontalContentAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Top,
-                Height = 35,
-                Margin = new Thickness(0, 450, 0, 0),
-                VerticalContentAlignment = VerticalAlignment.Center,
-                FontFamily = new FontFamily("Arial"),
-                FontWeight = FontWeights.SemiBold,
-                FontSize = 14
-            };
-
             grdConnectMain.Children.Add(lblName);
             grdConnectMain.Children.Add(LblTitle);
             grdConnectMain.Children.Add(LblInvite);
@@ -206,7 +193,6 @@ namespace Chess_Client.VIEW.CONNECT_VIEW
             grdConnectMain.Children.Add(DGInvite);
             grdConnectMain.Children.Add(lblInfo);
             grdConnectMain.Children.Add(lblInviteInfo);
-            grdConnectMain.Children.Add(lblSignature);
 
             return grdConnectMain;
         }

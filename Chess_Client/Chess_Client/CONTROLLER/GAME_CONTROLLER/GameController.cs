@@ -360,17 +360,17 @@ namespace Chess_Client.CONTROLLER.GAME_CONTROLLER
             if (splitCode[3].Equals("rematchAccept") == true)
             {
                 this.gameView.MainGameView.RematchInvitation = false;
+                this.gameView.MainGameView.InvitationAlreadySent = false;
                 foreach (object window in Application.Current.Windows)
                     if (window is MyMessageBox)
                         (window as MyMessageBox).Close();
 
                 this.gameView.IsEnabled = false;
-                MyMessageBox myMessageBox = new MyMessageBox("The match has started! Good luck! asta");
+                MyMessageBox myMessageBox = new MyMessageBox("The match has started! Good luck!");
                 myMessageBox.Left = this.gameView.Left + (this.gameView.Width - myMessageBox.Width) / 2;
                 myMessageBox.Top = this.gameView.Top + (this.gameView.Height - myMessageBox.Height) / 2;
                 myMessageBox.Closed += (sender, e) => { this.gameView.IsEnabled = true; };
                 myMessageBox.Show();
-
                 if (this.chessGame.IndexColor == 0)
                     this.chessGame.IsYourTurn = true;
                 else

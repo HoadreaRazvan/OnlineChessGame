@@ -37,7 +37,7 @@ namespace Chess_Client.VIEW.LOGIN_VIEW
             this.HorizontalAlignment = HorizontalAlignment.Left;
             this.VerticalAlignment = VerticalAlignment.Top;
             this.Width = 350;
-            this.Height = 360;
+            this.Height = 380;
             this.Margin = new Thickness(0, 45, 0, 0);
             this.CornerRadius = new CornerRadius(0, 0, 30, 30);
             this.Background = Brushes.White;
@@ -178,14 +178,15 @@ namespace Chess_Client.VIEW.LOGIN_VIEW
             Label LblSignature = new Label
             {
                 Name = "LblSignature",
-                Content = "Hoadrea Razvan S&E",
+                Content = "Created and Developed by \n    Hoadrea Razvan S&E",
                 HorizontalContentAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Top,
-                Height = 35,
-                Margin = new Thickness(0, 325, 0, 0),
+                Height = 55,
+                Margin = new Thickness(0, 320, 0, 0),
                 VerticalContentAlignment = VerticalAlignment.Center,
                 FontFamily = new FontFamily("Arial"),
                 FontWeight = FontWeights.SemiBold,
+                FontStyle = FontStyles.Italic,
                 FontSize = 14
             };
 
@@ -216,11 +217,11 @@ namespace Chess_Client.VIEW.LOGIN_VIEW
         private void TxbServerIP_TextChanged(object sender, TextChangedEventArgs e)
         {
             string inputText = this.txbServerIP.Text;
-            string pattern = "^[0-9.:]*$";
+            string pattern = "^[0-9.]*$";
             Regex regex = new Regex(pattern);
             if (!regex.IsMatch(inputText))
             {
-                this.txbServerIP.Text = Regex.Replace(inputText, "[^0-9.:]", "");
+                this.txbServerIP.Text = Regex.Replace(inputText, "[^0-9.]", "");
                 this.txbServerIP.CaretIndex = this.txbServerIP.Text.Length;
             }
         }

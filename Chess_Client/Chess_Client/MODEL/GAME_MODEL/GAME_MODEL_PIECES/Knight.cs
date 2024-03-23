@@ -29,7 +29,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_PIECES
                 pathImage = Directory.GetCurrentDirectory() + @"\Images\KnightW.png";
             if (pieceColor == PieceColor.Black)
                 pathImage = Directory.GetCurrentDirectory() + @"\Images\KnightB.png";
-            MyImage myImage = new MyImage(pathBackground, pathImage);
+            MyImage myImage = new MyImage(pathBackground, pathImage, this.chessGame.MyColor);
 
             base.MyImage = myImage;
             base.MyImage.MouseDown += MyImage_MouseDown;
