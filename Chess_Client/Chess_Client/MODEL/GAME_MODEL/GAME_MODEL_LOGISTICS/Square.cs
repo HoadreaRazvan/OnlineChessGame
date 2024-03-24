@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 {
-    public class Square : ICloneable
+    public class Square //: ICloneable
     {
         private object piece;
 
@@ -21,9 +21,9 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             get => this.piece; set => this.piece = value;
         }
 
-        public object Clone()
+        public Square Clone()
         {
-            return new Square(this.piece);
+            return new Square(piece);
         }
     }
 }

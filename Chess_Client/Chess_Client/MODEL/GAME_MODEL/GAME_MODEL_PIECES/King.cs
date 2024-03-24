@@ -72,7 +72,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_PIECES
                     {
                         bool validMove = true;
                         foreach (string move in (this.chessGame.Squares[(int)this.Point.X + dX[i], (int)this.Point.Y + dY[i]].Piece as Piece).CollisionMoves)
-                            if (move.Split("|")[0].Split(",")[2].Equals(this.chessGame.EnemyColor.ToString()) == true)                        
+                            if (move.Split("|")[0].Split(",")[2].Equals(this.chessGame.EnemyColor.ToString()) == true)
                                 validMove = false;
                         if (validMove == true)
                             moves += $"{(int)this.Point.X + dX[i]},{(int)this.Point.Y + dY[i]}|";

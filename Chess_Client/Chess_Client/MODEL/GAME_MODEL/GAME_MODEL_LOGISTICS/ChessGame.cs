@@ -26,7 +26,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
         private DispatcherTimer timer;
         private object lastPickedPiece;
         private MyImage lastMoveDark1, lastMoveLight1, lastMoveDark2, lastMoveLight2, lastMoveDark3, lastMoveLight3, lastMoveDark4, lastMoveLight4, lastBorderedPiece, attentionMyImage;
-        private string pathTransparent,pathPossibleMove,pathPossibleCapture,pathLastMoveDark,pathLastMoveLight,pathBorderMove,pathAttention, moveBigCastle, moveSmallCastle;
+        private string pathTransparent, pathPossibleMove, pathPossibleCapture, pathLastMoveDark, pathLastMoveLight, pathBorderMove, pathAttention, moveBigCastle, moveSmallCastle;
 
         public ChessGame(GameController gameController, int indexColor, int indexMirror) : base(indexColor)
         {
@@ -47,7 +47,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             this.pathBorderMove = Directory.GetCurrentDirectory() + @"\Images\BorderMove.png";
             this.pathAttention = Directory.GetCurrentDirectory() + @"\Images\Attention.png";
 
-            this.lastMoveDark1 = new MyImage(pathLastMoveDark, pathTransparent,this.MyColor);
+            this.lastMoveDark1 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
             this.lastMoveDark2 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
             this.lastMoveDark3 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
             this.lastMoveDark4 = new MyImage(pathLastMoveDark, pathTransparent, this.MyColor);
@@ -293,7 +293,6 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 
             newSquares[(int)(piece as Piece).Point.X, (int)(piece as Piece).Point.Y] = new Square(new Empty(PieceColor.None, new Point((piece as Piece).Point.X, (piece as Piece).Point.Y), chessGame));
 
-
             if (piece is Pawn)
                 newSquares[dX, dY] = new Square(new Pawn((piece as Piece).PieceColor, new Point(dX, dY), chessGame));
             else
@@ -358,7 +357,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
         }
 
 
-        public void makeMove(object piece,int dX,int dY)
+        public void makeMove(object piece, int dX, int dY)
         {
             this.gameController.GameView.MainGameView.TimerYou.Stop();
             this.gameController.GameView.MainGameView.TimerOpponent.Start();
@@ -370,7 +369,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             this.gameController.GameView.MainGameView.BoardMainGameView.CanvasBoard.Children.Remove(this.lastMoveLight3);
             this.gameController.GameView.MainGameView.BoardMainGameView.CanvasBoard.Children.Remove(this.lastMoveLight4);
 
-            if((this.Squares[dX, dY].Piece as Piece).MyImage.BackgroundPath==this.pathPossibleMove)
+            if ((this.Squares[dX, dY].Piece as Piece).MyImage.BackgroundPath == this.pathPossibleMove)
                 this.numberOfMovesWithoutCapture++;
             if ((this.Squares[dX, dY].Piece as Piece).MyImage.BackgroundPath == this.pathPossibleCapture)
                 this.numberOfMovesWithoutCapture = 0;
@@ -405,17 +404,15 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             this.setStackPanelCapturePiece(this.Squares[dX, dY].Piece, 0);
             this.setHistory(piece, this.Squares[dX, dY].Piece);
 
-            if (piece is Pawn && (piece as Pawn).IndexFirstMove == 0)            
-                (piece as Pawn).IndexFirstMove = 1;          
+            if (piece is Pawn && (piece as Pawn).IndexFirstMove == 0)
+                (piece as Pawn).IndexFirstMove = 1;
             else
             if (piece is Rook && (piece as Rook).AlreadyMoved == false)
                 (piece as Rook).AlreadyMoved = true;
             else
             if (piece is King && (piece as King).AlreadyMoved == false)
                 (piece as King).AlreadyMoved = true;
-
             this.gameController.Network.SendMessage(this.gameController.Network.You.IP + "|" + this.gameController.Network.Opponent.IP + "|gameController|movePiece|" + (7 - (int)(piece as Piece).Point.X) + "|" + (7 - (int)(piece as Piece).Point.Y) + "|" + (7 - (int)(this.Squares[dX, dY].Piece as Piece).Point.X) + "|" + (7 - (int)(this.Squares[dX, dY].Piece as Piece).Point.Y) + "|" + this.gameController.GameView.MainGameView.ChatHistoryMainGameView.History[this.gameController.GameView.MainGameView.ChatHistoryMainGameView.History.Count - 1].ToString());
-
             this.gameController.GameView.MainGameView.BoardMainGameView.CanvasBoard.Children.Remove((this.Squares[dX, dY].Piece as Piece).MyImage);
             this.Squares[(int)(piece as Piece).Point.X, (int)(piece as Piece).Point.Y] = new Square(new Empty(PieceColor.None, new Point((int)(piece as Piece).Point.X, (int)(piece as Piece).Point.Y), this));
             Canvas.SetLeft((this.Squares[(int)(piece as Piece).Point.X, (int)(piece as Piece).Point.Y].Piece as Piece).MyImage, ((piece as Piece)).Point.Y * 85);
@@ -424,7 +421,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             this.Squares[dX, dY].Piece = piece;
             (this.Squares[dX, dY].Piece as Piece).Point = new Point(dX, dY);
 
-            if (this.Squares[dX, dY].Piece is Pawn && (this.Squares[dX, dY].Piece as Piece).Point.X==0)
+            if (this.Squares[dX, dY].Piece is Pawn && (this.Squares[dX, dY].Piece as Piece).Point.X == 0)
             {
                 foreach (object window in Application.Current.Windows)
                     if (window is MyMessageBox)
@@ -449,7 +446,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 
             if (this.Squares[dX, dY].Piece is King)
             {
-                if (moveBigCastle.Equals(string.Empty) == false && int.Parse(moveBigCastle)==dY && dX==7)
+                if (moveBigCastle.Equals(string.Empty) == false && int.Parse(moveBigCastle) == dY && dX == 7)
                 {
                     if (moveBigCastle.Equals("2") == true)
                     {
@@ -460,7 +457,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
                         (this.Squares[7, 3].Piece as Rook).Point = new Point(7, 3);
                         (this.Squares[7, 3].Piece as Rook).AlreadyMoved = true;
 
-                        this.Squares[7,0] = new Square(new Empty(PieceColor.None, new Point(7,0), this));
+                        this.Squares[7, 0] = new Square(new Empty(PieceColor.None, new Point(7, 0), this));
                         Canvas.SetLeft((this.Squares[7, 0].Piece as Piece).MyImage, 0);
                         Canvas.SetTop((this.Squares[7, 0].Piece as Piece).MyImage, 595);
                         this.gameController.GameView.MainGameView.BoardMainGameView.CanvasBoard.Children.Add((this.Squares[7, 0].Piece as Piece).MyImage);
@@ -489,7 +486,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
                 {
                     if (moveSmallCastle.Equals("6") == true)
                     {
-                        
+
                         this.gameController.GameView.MainGameView.BoardMainGameView.CanvasBoard.Children.Remove((this.Squares[7, 5].Piece as Piece).MyImage);
                         Canvas.SetLeft((this.Squares[7, 7].Piece as Piece).MyImage, 425);
                         Canvas.SetTop((this.Squares[7, 7].Piece as Piece).MyImage, 595);
@@ -534,7 +531,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 
         }
 
-      
+
         public void statusGame()
         {
             for (int i = 0; i < 8; i++)
@@ -678,7 +675,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 
         }
 
-   
+
         public void setHistory(object piece1, object piece2)
         {
             string text = string.Empty;
@@ -711,7 +708,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             }
             if (piece2 is not Empty)
                 text += "x";
-            
+
             if (Math.Abs((this.indexMirror == 7 ? 9 : 0) - ((int)(piece2 as Piece).Point.Y + 1)) == 1) text += "a";
             if (Math.Abs((this.indexMirror == 7 ? 9 : 0) - ((int)(piece2 as Piece).Point.Y + 1)) == 2) text += "b";
             if (Math.Abs((this.indexMirror == 7 ? 9 : 0) - ((int)(piece2 as Piece).Point.Y + 1)) == 3) text += "c";
@@ -796,7 +793,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
 
         }
 
-      
+
         public string bigCastleCheck()
         {
             if (this.MyColor == PieceColor.White)
@@ -933,7 +930,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
         }
         public MyImage LastMoveLight3
         {
-            get => this.lastMoveLight3; set => this.lastMoveLight3=value;
+            get => this.lastMoveLight3; set => this.lastMoveLight3 = value;
         }
         public MyImage LastMoveLight4
         {

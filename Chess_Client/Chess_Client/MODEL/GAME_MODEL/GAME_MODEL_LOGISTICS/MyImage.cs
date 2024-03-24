@@ -44,14 +44,11 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
         {
             this.imagePath = imagePath;
             this.myColor = myColor;
-            if ((this.imagePath.Split(".")[this.imagePath.Split(".").Length - 2][this.imagePath.Split(".")[this.imagePath.Split(".").Length - 2].Length - 1]+"").Equals(((this.myColor == PieceColor.White) ? "W" : "B")) == true) 
+            if ((this.imagePath.Split(".")[this.imagePath.Split(".").Length - 2][this.imagePath.Split(".")[this.imagePath.Split(".").Length - 2].Length - 1] + "").Equals(((this.myColor == PieceColor.White) ? "W" : "B")) == true)
                 this.Cursor = Cursors.Hand;
             else
                 this.Cursor = Cursors.Arrow;
-            try
-            {
-                this.image.Source = new BitmapImage(new Uri(imagePath));
-            }catch (Exception ex) { } //din functia de matt
+            this.image.Source = new BitmapImage(new Uri(imagePath));
         }
 
         public void setBackgroundPath(string backgroundPath)
@@ -62,7 +59,7 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_LOGISTICS
             base.Background = imageBrush;
         }
 
-  
+
         public string BackgroundPath
         {
             get => this.backgroundPath; set => this.backgroundPath = value;

@@ -87,7 +87,10 @@ namespace Chess_Client.MODEL.GAME_MODEL.GAME_MODEL_PIECES
                             {
                                 if ((this.chessGame.Squares[(int)this.Point.X + dXmyColorEnPassant, (int)this.Point.Y + dY[j]].Piece as Piece).PieceColor.ToString().Equals(this.chessGame.EnemyColor.ToString()))
                                     moves += $"{(int)this.Point.X + dXmyColorEnPassant},{(int)this.Point.Y + dY[j]},enemyColorCollision|";
-                            }                          
+                                else
+                                if ((this.chessGame.Squares[(int)this.Point.X + dXmyColorEnPassant, (int)this.Point.Y + dY[j]].Piece as Piece).PieceColor.ToString().Equals(this.chessGame.EnemyColor.ToString())==false)
+                                    moves += $"{(int)this.Point.X + dXmyColorEnPassant},{(int)this.Point.Y + dY[j]},myColorCollision|";
+                            }
                         }
                     }
                 }
